@@ -344,14 +344,14 @@ impl Decode for TagHeaderDecoder {
 }
 
 #[derive(Debug)]
-enum TagData {
+pub enum TagData {
     Audio(AudioTagData),
     Video(VideoTagData),
     ScriptData(ScriptDataTagData),
 }
 
 #[derive(Debug)]
-struct AudioTagData {
+pub struct AudioTagData {
     pub sound_format: SoundFormat,
     pub sound_rate: SoundRate,
     pub sound_size: SoundSize,
@@ -361,7 +361,7 @@ struct AudioTagData {
 }
 
 #[derive(Debug)]
-struct VideoTagData {
+pub struct VideoTagData {
     frame_type: FrameType,
     codec_id: CodecId,
     avc_packet_type: Option<AvcPacketType>,
@@ -370,12 +370,12 @@ struct VideoTagData {
 }
 
 #[derive(Debug)]
-struct ScriptDataTagData {
+pub struct ScriptDataTagData {
     data: Vec<u8>,
 }
 
 #[derive(Debug)]
-enum TagDataDecoder {
+pub enum TagDataDecoder {
     Audio(AudioTagDataDecoder),
     Video(VideoTagDataDecoder),
     ScriptData(ScriptDataTagDataDecoder),
@@ -429,7 +429,7 @@ impl Default for TagDataDecoder {
 }
 
 #[derive(Debug, Default)]
-struct AudioTagDataDecoder {
+pub struct AudioTagDataDecoder {
     header: Peekable<U8Decoder>,
     aac_packet_type: U8Decoder,
     data: RemainingBytesDecoder,
@@ -512,7 +512,7 @@ impl Decode for FrameTypeAndCodecDecoder {
 }
 
 #[derive(Debug, Default)]
-struct VideoTagDataDecoder {
+pub struct VideoTagDataDecoder {
     frame_type_and_codec: Peekable<FrameTypeAndCodecDecoder>,
     avc_packet_type: U8Decoder,
     composition_time: U24beDecoder,
@@ -577,7 +577,7 @@ impl Decode for VideoTagDataDecoder {
 }
 
 #[derive(Debug, Default)]
-struct ScriptDataTagDataDecoder(RemainingBytesDecoder);
+pub struct ScriptDataTagDataDecoder(RemainingBytesDecoder);
 impl Decode for ScriptDataTagDataDecoder {
     type Item = ScriptDataTagData;
 
