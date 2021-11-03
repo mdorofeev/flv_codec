@@ -362,11 +362,11 @@ pub struct AudioTagData {
 
 #[derive(Debug)]
 pub struct VideoTagData {
-    frame_type: FrameType,
-    codec_id: CodecId,
-    avc_packet_type: Option<AvcPacketType>,
-    composition_time: Option<TimeOffset>,
-    data: Vec<u8>,
+    pub frame_type: FrameType,
+    pub codec_id: CodecId,
+    pub avc_packet_type: Option<AvcPacketType>,
+    pub composition_time: Option<TimeOffset>,
+    pub data: Vec<u8>,
 }
 
 #[derive(Debug)]
